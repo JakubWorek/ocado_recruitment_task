@@ -40,7 +40,7 @@ public class BasketSplitter{
     /* Method to split the basket items into delivery methods based on the predefined delivery options.
      * It filters the delivery options based on the basket items, generates all possible permutations of delivery methods,
      * and finds the best delivery method based on the number of items in each delivery method.
-     * It returns a map of delivery methods with the corresponding basket items assigned to each method.
+     * It returns a map where each key represents a delivery method and the value is a list of basket items assigned to that method.
      */
     public Map<String, List<String>> split(List<String> basketItems) {
         if (deliveryOptions == null) {
@@ -50,11 +50,12 @@ public class BasketSplitter{
         Map<String, List<String>> filteredConfig = filterConfigByBasketItems(basketItems);
         validateFilteredConfig(filteredConfig, basketItems);
 
-        Set<String> deliveryMethods = getUniqueDeliveryMethods(filteredConfig);
-
-        List<List<String>> permutations = generatePermutations(new ArrayList<>(deliveryMethods));
-
-        return findBestDeliveryMethod(filteredConfig, permutations);
+        return findBestDeliveryMethod(
+                filteredConfig,
+                generatePermutations(
+                        new ArrayList<>(getUniqueDeliveryMethods( filteredConfig ))
+                )
+        );
     }
 
     /* Helper method to validate the filtered configuration based on the basket items.

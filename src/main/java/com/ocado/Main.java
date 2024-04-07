@@ -13,12 +13,12 @@ import com.ocado.basket.BasketSplitter;
 public class Main {
 
     public static void main(String[] args) {
-        BasketSplitter basketSplitter = new BasketSplitter("D:/DEV/GIT/ocado/src/main/resources/config-1.json");
+        BasketSplitter basketSplitter = new BasketSplitter("D:/DEV/GIT/ocado/src/main/resources/config.json");
 
         ObjectMapper objectMapper = new ObjectMapper();
         List<String> items = new ArrayList<>();
         try {
-            items = objectMapper.readValue(new File("src/main/resources/basket-3.json"), new TypeReference<>(){});
+            items = objectMapper.readValue(new File("src/main/resources/basket-2.json"), new TypeReference<>(){});
         } catch (IOException e) {
             e.printStackTrace();
         }
